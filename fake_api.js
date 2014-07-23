@@ -360,7 +360,7 @@ var TRANSIT_RESULTS = t.map([
       "to_user_id_str", null
     ]),
     t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 22,38,22 +0000"),
+      "created_at", new Date("Thu, 06 Oct 2011 22:38:22 +0000"),
       "entities", t.map([
         "urls", [
           t.map([
@@ -391,7 +391,7 @@ var TRANSIT_RESULTS = t.map([
       "to_user_id_str", null
     ]),
     t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 22,37,28 +0000"),
+      "created_at", new Date("Thu, 06 Oct 2011 22:37:28 +0000"),
       "entities", t.map([
         "urls", [
           t.map([
