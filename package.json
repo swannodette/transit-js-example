@@ -1,6 +1,7 @@
 {
     "name": "transit-example",
     "dependencies": {
+        "express": "4.6.1",
         "transit-js": "0.8.616",
         "URIjs": "1.13.2"
     },
