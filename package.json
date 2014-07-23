@@ -3,5 +3,8 @@
     "dependencies": {
         "transit-js": "0.8.616",
         "URIjs": "1.13.2"
+    },
+    "devDependencies": {
+        "browserify": "4.2.3"
     }
 }
