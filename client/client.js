@@ -4,12 +4,12 @@
         t  = global.transit,
         th = global.transitHandlers,
         r  = transit.reader("json", {
-            handlers: _.extend(th.readHandlers, {
-                "m": function(v) {
-                    return global.moment(parseInt(v,10));
-                }
-            })
-        });
+                 handlers: _.extend(th.readHandlers, {
+                     "m": function(v) {
+                         return global.moment(parseInt(v,10));
+                     }
+                 })
+             });
 
     j.get("json", function(data) {
         console.log(data);
