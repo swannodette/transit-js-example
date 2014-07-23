@@ -15,5 +15,7 @@ node_modules/.bin/bower install
 You can then run the application with:
 
 ```shell
-node main.js
+node server.js
 ```
+
+Then point your browser at http://localhost:3000.
