@@ -1,10 +1,8 @@
-var t    = require("transit-js"),
-    url  = require("url"),
+var transit  = require("transit-js"),
+    handlers = require("./handlers");
 
-var r = t.reader("json", {"handlers": rhs});
-var w = t.writer("json", {"handlers": whs});
+var r = transit.reader("json", {"handlers": handlers.readHandlers});
+var w = transit.writer("json", {"handlers": handlers.writeHandlers});
 var data = r.read('{"~#r":"https://api.twitter.com/1.1/search/tweets.json?q=%40twitterapi"}');
 
-
-
-//console.log(w.write(data));
+console.log(w.write(data));

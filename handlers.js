@@ -7,8 +7,8 @@ module.exports = {
             return URI(v);
         }
     },
-    writeHandlers: t.map([
-        URI, t.makeWriteHandler({
+    writeHandlers: transit.map([
+        URI, transit.makeWriteHandler({
             "tag": function(v) { return "r" },
             "rep": function(v) { return v.toString() },
             "stringRep": function(v) { return null }
