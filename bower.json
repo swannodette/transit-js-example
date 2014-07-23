@@ -1,0 +1,7 @@
+{
+    "name": "transit-example",
+    "dependencies": {
+        "transit-js": "0.8.616",
+        "URIjs": "1.13.2"
+    }
+}
