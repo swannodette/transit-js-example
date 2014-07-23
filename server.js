@@ -3,7 +3,9 @@ var express  = require("express"),
     transit  = require("transit-js"),
     URI      = require("URIjs"),
     fs       = require("fs"),
-    handlers = require("./shared/handlers");
+    handlers = require("./shared/handlers"),
+    jsonRes  = require("./fake_api").JSON_RESULTS,
+    transitRes = require("./fake_api").TRANSIT_RESULTS;
 
 var r = transit.reader("json", {"handlers": handlers.readHandlers});
 var w = transit.writer("json", {"handlers": handlers.writeHandlers});
@@ -23,5 +25,14 @@ app.get("/", function(req, res) {
     });
 });
 
-app.listen(3000);
+app.get("/json", function(req, res) {
+    res.setHeader("Content-Type", "application/json");
+    res.send(200, JSON.stringify(jsonRes));
+});
 
+app.get("/transit", function(req, res) {
+    res.setHeader("Content-Type", "application/transit+json");
+    res.send(200, w.write(transitRes));
+});
+
+app.listen(3000);
