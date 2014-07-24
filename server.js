@@ -1,13 +1,10 @@
-var express  = require("express"),
-    app      = express(),
+var fs       = require("fs"),
     transit  = require("transit-js"),
-    URI      = require("URIjs"),
-    fs       = require("fs"),
     handlers = require("./shared/handlers"),
-    jsonRes  = require("./fake_api").JSON_RESULTS,
-    transitRes = require("./fake_api").TRANSIT_RESULTS;
-
-var w = transit.writer("json", {"handlers": handlers.writeHandlers});
+    w        = transit.writer("json", {"handlers": handlers.writeHandlers});
+    express  = require("express"),
+    app      = express(),
+    fakeApi  = require("./fake_api"),
 
 app.use(express.static(__dirname, + "/bower_components"));
 app.use(express.static(__dirname, + "/shared"));
@@ -25,12 +22,12 @@ app.get("/", function(req, res) {
 
 app.get("/json", function(req, res) {
     res.setHeader("Content-Type", "application/json");
-    res.send(200, JSON.stringify(jsonRes));
+    res.send(200, JSON.stringify(fakeApi.JSON_RESULTS));
 });
 
 app.get("/transit", function(req, res) {
     res.setHeader("Content-Type", "application/transit+json");
-    res.send(200, w.write(transitRes));
+    res.send(200, w.write(fakeApi.TRANSIT_RESULTS));
 });
 
 app.listen(3000);
