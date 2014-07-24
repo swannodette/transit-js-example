@@ -3,7 +3,8 @@
     "dependencies": {
         "transit-js": "0.8.616",
         "URIjs": "1.13.2",
-        "underscore": "1.6.0",
-        "moment": "2.7.0"
+        "color": "2.4.1",
+        "moment": "2.7.0",
+        "underscore": "1.6.0"
     }
 }

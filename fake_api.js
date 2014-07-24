@@ -1,431 +1,818 @@
-var t   = require("transit-js"),
-    URI = require("URIjs"),
-    hs  = require("./shared/handlers");
+var t     = require("transit-js"),
+    URI   = require("URIjs"),
+    color = require("onecolor"),
+    hs    = require("./shared/handlers");
 
 var ks = ["mixed", "recent", "popular"].reduce(function(ret, name) {
     return ret[name] = t.keyword(name);
 }, {});
 
 var JSON_RESULTS = {
-  "completed_in":0.031,
-  "max_id":122078461840982016,
-  "max_id_str":"122078461840982016",
-  "next_page":"?page=2&max_id=122078461840982016&q=blue%20angels&rpp=5",
-  "page":1,
-  "query":"blue+angels",
-  "refresh_url":"?since_id=122078461840982016&q=blue%20angels",
-  "results":[
-    {
-      "created_at":"Thu, 06 Oct 2011 19:36:17 +0000",
-      "entities":{
-        "urls":[
-          {
-            "url":"http://t.co/L9JXJ2ee",
-            "expanded_url":"http://bit.ly/q9fyz9",
-            "display_url":"bit.ly/q9fyz9",
-            "indices":[
-              37,
-              57
-            ]
-          }
-        ]
-      },
-      "from_user":"SFist",
-      "from_user_id":14093707,
-      "from_user_id_str":"14093707",
-      "geo": null,
-      "id":122032448266698752,
-      "id_str":"122032448266698752",
-      "iso_language_code":"en",
-      "metadata":{
-        "recent_retweets":3,
-        "result_type":"popular"
-      },
-      "profile_image_url":"http://a3.twimg.com/profile_images/51584619/SFist07_normal.jpg",
-      "source":"&lt;a href=&quot;http://twitter.com/tweetbutton&quot; rel=&quot;nofollow&quot;&gt;Tweet Button&lt;/a&gt;",
-      "text":"Reminder: Blue Angels practice today http://t.co/L9JXJ2ee",
-      "to_user_id":null,
-      "to_user_id_str":null
-    },
-    {
-      "created_at":"Thu, 06 Oct 2011 19:41:12 +0000",
-      "entities":{
- 
-      },
-      "from_user":"masters212",
-      "from_user_id":2242041,
-      "from_user_id_str":"2242041",
-      "geo":null,
-      "id":122033683212419072,
-      "id_str":"122033683212419072",
-      "iso_language_code":"en",
-      "metadata":{
-        "recent_retweets":1,
-        "result_type":"popular"
-      },
-      "profile_image_url":"http://a3.twimg.com/profile_images/488532540/rachel25final_normal.jpg",
-      "source":"&lt;a href=&quot;http://twitter.com/&quot;&gt;web&lt;/a&gt;",
-      "text":"Starting to hear Blue Angels... Not such angels with all of the noise and carbon pollution.",
-      "to_user_id":null,
-      "to_user_id_str":null
-    },
-    {
-      "created_at":"Thu, 06 Oct 2011 19:39:52 +0000",
-      "entities":{
- 
-      },
-      "from_user":"SFBayBridge",
-      "from_user_id":182107587,
-      "from_user_id_str":"182107587",
-      "geo":null,
-      "id":122033350327279617,
-      "id_str":"122033350327279617",
-      "iso_language_code":"en",
-      "metadata":{
-        "recent_retweets":1,
-        "result_type":"popular"
-      },
-      "profile_image_url":"http://a0.twimg.com/profile_images/1162882917/bbtwitternew_normal.jpg",
-      "source":"&lt;a href=&quot;http://twitter.com/&quot;&gt;web&lt;/a&gt;",
-      "text":"BZZZzzzZzZzzzZZZZZzZz WHAT? I CAN'T HEAR YOU. THERE ARE BLUE ANGELS. ZZZzzZZZ!",
-      "to_user_id":null,
-      "to_user_id_str":null
-    },
-    {
-      "created_at":"Thu, 06 Oct 2011 22:39:08 +0000",
-      "entities":{
- 
-      },
-      "from_user":"OnDST",
-      "from_user_id":265656068,
-      "from_user_id_str":"265656068",
-      "geo":null,
-      "id":122078461840982016,
-      "id_str":"122078461840982016",
-      "iso_language_code":"nl",
-      "metadata":{
-        "result_type":"recent"
-      },
-      "profile_image_url":"http://a3.twimg.com/profile_images/1271597598/OnDST_normal.jpg",
-      "source":"&lt;a href=&quot;http://dlvr.it&quot; rel=&quot;nofollow&quot;&gt;dlvr.it&lt;/a&gt;",
-      "text":"SF Fleet Week to open with Blue Angels flyovers | Student ...",
-      "to_user_id":null,
-      "to_user_id_str":null
-    },
-    {
-      "created_at":"Thu, 06 Oct 2011 22:38:51 +0000",
-      "entities":{
- 
-      },
-      "from_user":"gusbumper",
-      "from_user_id":15912539,
-      "from_user_id_str":"15912539",
-      "geo":null,
-      "id":122078393641603072,
-      "id_str":"122078393641603072",
-      "iso_language_code":"en",
-      "metadata":{
-        "result_type":"recent"
-      },
-      "profile_image_url":"http://a2.twimg.com/profile_images/832286946/pho_normal.jpg",
-      "source":"&lt;a href=&quot;http://itunes.apple.com/us/app/twitter/id409789998?mt=12&quot; rel=&quot;nofollow&quot;&gt;Twitter for Mac&lt;/a&gt;",
-      "text":"RT @gzahnd: WAKE UP HIPPIES, THE BLUE ANGELS ARE IN TOWN!",
-      "to_user_id":null,
-      "to_user_id_str":null
-    },
-    {
-      "created_at":"Thu, 06 Oct 2011 22:38:31 +0000",
-      "entities":{
- 
-      },
-      "from_user":"LUVTQUILT",
-      "from_user_id":32653550,
-      "from_user_id_str":"32653550",
-      "geo":null,
-      "id":122078309004742656,
-      "id_str":"122078309004742656",
-      "iso_language_code":"en",
-      "metadata":{
-        "result_type":"recent"
-      },
-      "profile_image_url":"http://a1.twimg.com/profile_images/1188428056/IMG00007-20100521-1647_1__normal.jpg",
-      "source":"&lt;a href=&quot;http://ubersocial.com&quot; rel=&quot;nofollow&quot;&gt;\u00DCberSocial for BlackBerry&lt;/a&gt;",
-      "text":"Thursday - Just watched the Blue Angels practice over SF Bay Impressive! What a background.  GGB & Alcatraz. ;) .",
-      "to_user_id":null,
-      "to_user_id_str":null
-    },
-    {
-      "created_at":"Thu, 06 Oct 2011 22:38:22 +0000",
-      "entities":{
-        "urls":[
-          {
-            "url":"http://t.co/fyL8Rs5f",
-            "expanded_url":"http://dlvr.it/pfFfj",
-            "display_url":"dlvr.it/pfFfj",
-            "indices":[
-              52,
-              72
-            ]
-          }
-        ]
-      },
-      "from_user":"johnnyfuncheap",
-      "from_user_id":20717004,
-      "from_user_id_str":"20717004",
-      "geo":null,
-      "id":122078271478317056,
-      "id_str":"122078271478317056",
-      "iso_language_code":"en",
-      "metadata":{
-        "result_type":"recent"
-      },
-      "profile_image_url":"http://a0.twimg.com/profile_images/1130541908/funcheap_icon_twitter_normal.gif",
-      "source":"&lt;a href=&quot;http://dlvr.it&quot; rel=&quot;nofollow&quot;&gt;dlvr.it&lt;/a&gt;",
-      "text":"10/8/11: Blue Angels Wine Tasting | Treasure Island http://t.co/fyL8Rs5f",
-      "to_user_id":null,
-      "to_user_id_str":null
-    },
-    {
-      "created_at":"Thu, 06 Oct 2011 22:37:28 +0000",
-      "entities":{
-        "urls":[
-          {
-            "url":"http://t.co/KfzEqOWM",
-            "expanded_url":"http://married2travel.com/2600/san-francisco-day3-golden-gate-park-pier-39-blue-angels/",
-            "display_url":"married2travel.com/2600/san-franc\u2026",
-            "indices":[
-              47,
-              67
-            ]
-          }
-        ]
-      },
-      "from_user":"espenorio",
-      "from_user_id":52736683,
-      "from_user_id_str":"52736683",
-      "geo":null,
-      "id":122078043664695296,
-      "id_str":"122078043664695296",
-      "iso_language_code":"en",
-      "metadata":{
-        "result_type":"recent"
-      },
-      "profile_image_url":"http://a0.twimg.com/profile_images/1574863913/sheil_normal.png",
-      "source":"&lt;a href=&quot;http://twitter.com/&quot;&gt;web&lt;/a&gt;",
-      "text":"San Francisco 2010 Fleet week photos and video http://t.co/KfzEqOWM",
-      "to_user_id":null,
-      "to_user_id_str":null
+    "statuses": [
+        {
+            "coordinates": null,
+            "favorited": false,
+            "truncated": false,
+            "created_at": "Mon Sep 24 03:35:21 +0000 2012",
+            "id_str": "250075927172759552",
+            "entities": {
+                "urls": [
+                    
+                ],
+                "hashtags": [
+                    {
+                        "text": "freebandnames",
+                        "indices": [
+                            20,
+                            34
+                        ]
+                    }
+                ],
+                "user_mentions": [
+                    
+                ]
+            },
+            "in_reply_to_user_id_str": null,
+            "contributors": null,
+            "text": "Aggressive Ponytail #freebandnames",
+            "metadata": {
+                "iso_language_code": "en",
+                "result_type": "recent"
+            },
+            "retweet_count": 0,
+            "in_reply_to_status_id_str": null,
+            "id": 250075927172759552,
+            "geo": null,
+            "retweeted": false,
+            "in_reply_to_user_id": null,
+            "place": null,
+            "user": {
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_background_tile": false,
+                "name": "Sean Cummings",
+                "profile_image_url": "http://a0.twimg.com/profile_images/2359746665/1v6zfgqo8g0d3mk7ii5s_normal.jpeg",
+                "created_at": "Mon Apr 26 06:01:55 +0000 2010",
+                "location": "LA, CA",
+                "follow_request_sent": null,
+                "profile_link_color": "0084B4",
+                "is_translator": false,
+                "id_str": "137238150",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "expanded_url": null,
+                                "url": "",
+                                "indices": [
+                                    0,
+                                    0
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": [
+                            
+                        ]
+                    }
+                },
+                "default_profile": true,
+                "contributors_enabled": false,
+                "favourites_count": 0,
+                "url": null,
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/2359746665/1v6zfgqo8g0d3mk7ii5s_normal.jpeg",
+                "utc_offset": -28800,
+                "id": 137238150,
+                "profile_use_background_image": true,
+                "listed_count": 2,
+                "profile_text_color": "333333",
+                "lang": "en",
+                "followers_count": 70,
+                "protected": false,
+                "notifications": null,
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_color": "C0DEED",
+                "verified": false,
+                "geo_enabled": true,
+                "time_zone": "Pacific Time (US & Canada)",
+                "description": "Born 330 Live 310",
+                "default_profile_image": false,
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "statuses_count": 579,
+                "friends_count": 110,
+                "following": null,
+                "show_all_inline_media": false,
+                "screen_name": "sean_cummings"
+            },
+            "in_reply_to_screen_name": null,
+            "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+            "in_reply_to_status_id": null
+        },
+        {
+            "coordinates": null,
+            "favorited": false,
+            "truncated": false,
+            "created_at": "Fri Sep 21 23:40:54 +0000 2012",
+            "id_str": "249292149810667520",
+            "entities": {
+                "urls": [
+                    
+                ],
+                "hashtags": [
+                    {
+                        "text": "FreeBandNames",
+                        "indices": [
+                            20,
+                            34
+                        ]
+                    }
+                ],
+                "user_mentions": [
+                    
+                ]
+            },
+            "in_reply_to_user_id_str": null,
+            "contributors": null,
+            "text": "Thee Namaste Nerdz. #FreeBandNames",
+            "metadata": {
+                "iso_language_code": "pl",
+                "result_type": "recent"
+            },
+            "retweet_count": 0,
+            "in_reply_to_status_id_str": null,
+            "id": 249292149810667520,
+            "geo": null,
+            "retweeted": false,
+            "in_reply_to_user_id": null,
+            "place": null,
+            "user": {
+                "profile_sidebar_fill_color": "DDFFCC",
+                "profile_sidebar_border_color": "BDDCAD",
+                "profile_background_tile": true,
+                "name": "Chaz Martenstein",
+                "profile_image_url": "http://a0.twimg.com/profile_images/447958234/Lichtenstein_normal.jpg",
+                "created_at": "Tue Apr 07 19:05:07 +0000 2009",
+                "location": "Durham, NC",
+                "follow_request_sent": null,
+                "profile_link_color": "0084B4",
+                "is_translator": false,
+                "id_str": "29516238",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "expanded_url": null,
+                                "url": "http://bullcityrecords.com/wnng/",
+                                "indices": [
+                                    0,
+                                    32
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": [
+                            
+                        ]
+                    }
+                },
+                "default_profile": false,
+                "contributors_enabled": false,
+                "favourites_count": 8,
+                "url": "http://bullcityrecords.com/wnng/",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/447958234/Lichtenstein_normal.jpg",
+                "utc_offset": -18000,
+                "id": 29516238,
+                "profile_use_background_image": true,
+                "listed_count": 118,
+                "profile_text_color": "333333",
+                "lang": "en",
+                "followers_count": 2052,
+                "protected": false,
+                "notifications": null,
+                "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/9423277/background_tile.bmp",
+                "profile_background_color": "9AE4E8",
+                "verified": false,
+                "geo_enabled": false,
+                "time_zone": "Eastern Time (US & Canada)",
+                "description": "You will come to Durham, North Carolina. I will sell you some records then, here in Durham, North Carolina. Fun will happen.",
+                "default_profile_image": false,
+                "profile_background_image_url": "http://a0.twimg.com/profile_background_images/9423277/background_tile.bmp",
+                "statuses_count": 7579,
+                "friends_count": 348,
+                "following": null,
+                "show_all_inline_media": true,
+                "screen_name": "bullcityrecords"
+            },
+            "in_reply_to_screen_name": null,
+            "source": "web",
+            "in_reply_to_status_id": null
+        },
+        {
+            "coordinates": null,
+            "favorited": false,
+            "truncated": false,
+            "created_at": "Fri Sep 21 23:30:20 +0000 2012",
+            "id_str": "249289491129438208",
+            "entities": {
+                "urls": [
+                    
+                ],
+                "hashtags": [
+                    {
+                        "text": "freebandnames",
+                        "indices": [
+                            29,
+                            43
+                        ]
+                    }
+                ],
+                "user_mentions": [
+                    
+                ]
+            },
+            "in_reply_to_user_id_str": null,
+            "contributors": null,
+            "text": "Mexican Heaven, Mexican Hell #freebandnames",
+            "metadata": {
+                "iso_language_code": "en",
+                "result_type": "recent"
+            },
+            "retweet_count": 0,
+            "in_reply_to_status_id_str": null,
+            "id": 249289491129438208,
+            "geo": null,
+            "retweeted": false,
+            "in_reply_to_user_id": null,
+            "place": null,
+            "user": {
+                "profile_sidebar_fill_color": "99CC33",
+                "profile_sidebar_border_color": "829D5E",
+                "profile_background_tile": false,
+                "name": "Thomas John Wakeman",
+                "profile_image_url": "http://a0.twimg.com/profile_images/2219333930/Froggystyle_normal.png",
+                "created_at": "Tue Sep 01 21:21:35 +0000 2009",
+                "location": "Kingston New York",
+                "follow_request_sent": null,
+                "profile_link_color": "D02B55",
+                "is_translator": false,
+                "id_str": "70789458",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "expanded_url": null,
+                                "url": "",
+                                "indices": [
+                                    0,
+                                    0
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": [
+                            
+                        ]
+                    }
+                },
+                "default_profile": false,
+                "contributors_enabled": false,
+                "favourites_count": 19,
+                "url": null,
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/2219333930/Froggystyle_normal.png",
+                "utc_offset": -18000,
+                "id": 70789458,
+                "profile_use_background_image": true,
+                "listed_count": 1,
+                "profile_text_color": "3E4415",
+                "lang": "en",
+                "followers_count": 63,
+                "protected": false,
+                "notifications": null,
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme5/bg.gif",
+                "profile_background_color": "352726",
+                "verified": false,
+                "geo_enabled": false,
+                "time_zone": "Eastern Time (US & Canada)",
+                "description": "Science Fiction Writer, sort of. Likes Superheroes, Mole People, Alt. Timelines.",
+                "default_profile_image": false,
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme5/bg.gif",
+                "statuses_count": 1048,
+                "friends_count": 63,
+                "following": null,
+                "show_all_inline_media": false,
+                "screen_name": "MonkiesFist"
+            },
+            "in_reply_to_screen_name": null,
+            "source": "web",
+            "in_reply_to_status_id": null
+        },
+        {
+            "coordinates": null,
+            "favorited": false,
+            "truncated": false,
+            "created_at": "Fri Sep 21 22:51:18 +0000 2012",
+            "id_str": "249279667666817024",
+            "entities": {
+                "urls": [
+                    
+                ],
+                "hashtags": [
+                    {
+                        "text": "freebandnames",
+                        "indices": [
+                            20,
+                            34
+                        ]
+                    }
+                ],
+                "user_mentions": [
+                    
+                ]
+            },
+            "in_reply_to_user_id_str": null,
+            "contributors": null,
+            "text": "The Foolish Mortals #freebandnames",
+            "metadata": {
+                "iso_language_code": "en",
+                "result_type": "recent"
+            },
+            "retweet_count": 0,
+            "in_reply_to_status_id_str": null,
+            "id": 249279667666817024,
+            "geo": null,
+            "retweeted": false,
+            "in_reply_to_user_id": null,
+            "place": null,
+            "user": {
+                "profile_sidebar_fill_color": "BFAC83",
+                "profile_sidebar_border_color": "615A44",
+                "profile_background_tile": true,
+                "name": "Marty Elmer",
+                "profile_image_url": "http://a0.twimg.com/profile_images/1629790393/shrinker_2000_trans_normal.png",
+                "created_at": "Mon May 04 00:05:00 +0000 2009",
+                "location": "Wisconsin, USA",
+                "follow_request_sent": null,
+                "profile_link_color": "3B2A26",
+                "is_translator": false,
+                "id_str": "37539828",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "expanded_url": null,
+                                "url": "http://www.omnitarian.me",
+                                "indices": [
+                                    0,
+                                    24
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": [
+                            
+                        ]
+                    }
+                },
+                "default_profile": false,
+                "contributors_enabled": false,
+                "favourites_count": 647,
+                "url": "http://www.omnitarian.me",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/1629790393/shrinker_2000_trans_normal.png",
+                "utc_offset": -21600,
+                "id": 37539828,
+                "profile_use_background_image": true,
+                "listed_count": 52,
+                "profile_text_color": "000000",
+                "lang": "en",
+                "followers_count": 608,
+                "protected": false,
+                "notifications": null,
+                "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/106455659/rect6056-9.png",
+                "profile_background_color": "EEE3C4",
+                "verified": false,
+                "geo_enabled": false,
+                "time_zone": "Central Time (US & Canada)",
+                "description": "Cartoonist, Illustrator, and T-Shirt connoisseur",
+                "default_profile_image": false,
+                "profile_background_image_url": "http://a0.twimg.com/profile_background_images/106455659/rect6056-9.png",
+                "statuses_count": 3575,
+                "friends_count": 249,
+                "following": null,
+                "show_all_inline_media": true,
+                "screen_name": "Omnitarian"
+            },
+            "in_reply_to_screen_name": null,
+            "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+            "in_reply_to_status_id": null
+        }
+    ],
+    "search_metadata": {
+        "max_id": 250126199840518145,
+        "since_id": 24012619984051000,
+        "refresh_url": "?since_id=250126199840518145&q=%23freebandnames&result_type=mixed&include_entities=1",
+        "next_results": "?max_id=249279667666817023&q=%23freebandnames&count=4&include_entities=1&result_type=mixed",
+        "count": 4,
+        "completed_in": 0.035,
+        "since_id_str": "24012619984051000",
+        "query": "%23freebandnames",
+        "max_id_str": "250126199840518145"
     }
-  ],
-  "results_per_page":5,
-  "since_id":0,
-  "since_id_str":"0"
 };
 
 var TRANSIT_RESULTS = t.map([
-  "completed_in", 0.031,
-  "max_id", 122078461840982016,
-  "max_id_str", "122078461840982016",
-  "next_page", "?page=2&max_id=122078461840982016&q=blue%20angels&rpp=5",
-  "page", 1,
-  "query", "blue+angels",
-  "refresh_url", "?since_id=122078461840982016&q=blue%20angels",
-  "results", [
-    t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 19:36:17 +0000"),
-      "entities", t.map([
-        "urls", [
-          t.map([
-            "url", URI("http://t.co/L9JXJ2ee"),
-            "expanded_url", URI("http://bit.ly/q9fyz9"),
-            "display_url", "bit.ly/q9fyz9",
-            "indices", [
-              37,
-              57
-            ]
-          ])
-        ]
-      ]),
-      "from_user", "SFist",
-      "from_user_id", 14093707,
-      "from_user_id_str", "14093707",
-      "geo", null,
-      "id", 122032448266698752,
-      "id_str", "122032448266698752",
-      "iso_language_code", "en",
-      "metadata", t.map([
-        "recent_retweets", 3,
-        "result_type", ks.popular
-      ]),
-      "profile_image_url", URI("http://a3.twimg.com/profile_images/51584619/SFist07_normal.jpg"),
-      "source", "&lt;a href=&quot;http://twitter.com/tweetbutton&quot; rel=&quot;nofollow&quot;&gt;Tweet Button&lt;/a&gt;",
-      "text", "Reminder: Blue Angels practice today http://t.co/L9JXJ2ee",
-      "to_user_id", null,
-      "to_user_id_str", null
-    ]),
-    t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 19:41:12 +0000"),
-      "entities", t.map(),
-      "from_user", "masters212",
-      "from_user_id", 2242041,
-      "from_user_id_str", "2242041",
-      "geo", null,
-      "id", 122033683212419072,
-      "id_str", "122033683212419072",
-      "iso_language_code", "en",
-      "metadata", t.map([
-        "recent_retweets", 1,
-        "result_type", ks.popular
-      ]),
-      "profile_image_url", URI("http://a3.twimg.com/profile_images/488532540/rachel25final_normal.jpg"),
-      "source", "&lt;a href=&quot;http://twitter.com/&quot;&gt;web&lt;/a&gt;",
-      "text", "Starting to hear Blue Angels... Not such angels with all of the noise and carbon pollution.",
-      "to_user_id", null,
-      "to_user_id_str", null
-    ]),
-    t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 19:39:52 +0000"),
-      "entities", t.map(),
-      "from_user", "SFBayBridge",
-      "from_user_id", 182107587,
-      "from_user_id_str", "182107587",
-      "geo", null,
-      "id", 122033350327279617,
-      "id_str", "122033350327279617",
-      "iso_language_code", "en",
-      "metadata", t.map([
-        "recent_retweets", 1,
-        "result_type", ks.popular
-      ]),
-      "profile_image_url", URI("http://a0.twimg.com/profile_images/1162882917/bbtwitternew_normal.jpg"),
-      "source", "&lt;a href=&quot;http://twitter.com/&quot;&gt;web&lt;/a&gt;",
-      "text", "BZZZzzzZzZzzzZZZZZzZz WHAT? I CAN'T HEAR YOU. THERE ARE BLUE ANGELS. ZZZzzZZZ!",
-      "to_user_id", null,
-      "to_user_id_str", null
-    ]),
-    t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 22:39:08 +0000"),
-      "entities", t.map(),
-      "from_user", "OnDST",
-      "from_user_id", 265656068,
-      "from_user_id_str", "265656068",
-      "geo", null,
-      "id", 122078461840982016,
-      "id_str", "122078461840982016",
-      "iso_language_code", "nl",
-      "metadata", t.map([
-        "result_type", ks.recent
-      ]),
-      "profile_image_url", URI("http://a3.twimg.com/profile_images/1271597598/OnDST_normal.jpg"),
-      "source", "&lt;a href=&quot;http://dlvr.it&quot; rel=&quot;nofollow&quot;&gt;dlvr.it&lt;/a&gt;",
-      "text", "SF Fleet Week to open with Blue Angels flyovers | Student ...",
-      "to_user_id", null,
-      "to_user_id_str", null
-    ]),
-    t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 22:38:51 +0000"),
-      "entities", t.map(),
-      "from_user", "gusbumper",
-      "from_user_id", 15912539,
-      "from_user_id_str", "15912539",
-      "geo", null,
-      "id", 122078393641603072,
-      "id_str", "122078393641603072",
-      "iso_language_code", "en",
-      "metadata", t.map([
-        "result_type", ks.recent
-      ]),
-      "profile_image_url", URI("http://a2.twimg.com/profile_images/832286946/pho_normal.jpg"),
-      "source", "&lt;a href=&quot;http://itunes.apple.com/us/app/twitter/id409789998?mt=12&quot; rel=&quot;nofollow&quot;&gt;Twitter for Mac&lt;/a&gt;",
-      "text", "RT @gzahnd: WAKE UP HIPPIES, THE BLUE ANGELS ARE IN TOWN!",
-      "to_user_id", null,
-      "to_user_id_str", null
-    ]),
-    t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 22:38:31 +0000"),
-      "entities", t.map(),
-      "from_user", "LUVTQUILT",
-      "from_user_id", 32653550,
-      "from_user_id_str", "32653550",
-      "geo", null,
-      "id", 122078309004742656,
-      "id_str", "122078309004742656",
-      "iso_language_code", "en",
-      "metadata", t.map([
-        "result_type", ks.recent
-      ]),
-      "profile_image_url", URI("http://a1.twimg.com/profile_images/1188428056/IMG00007-20100521-1647_1__normal.jpg"),
-      "source", "&lt;a href=&quot;http://ubersocial.com&quot; rel=&quot;nofollow&quot;&gt;\u00DCberSocial for BlackBerry&lt;/a&gt;",
-      "text", "Thursday - Just watched the Blue Angels practice over SF Bay Impressive! What a background.  GGB & Alcatraz. ;) .",
-      "to_user_id", null,
-      "to_user_id_str", null
-    ]),
-    t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 22:38:22 +0000"),
-      "entities", t.map([
-        "urls", [
-          t.map([
-            "url", URI("http,//t.co/fyL8Rs5f"),
-            "expanded_url", URI("http,//dlvr.it/pfFfj"),
-            "display_url", "dlvr.it/pfFfj",
-            "indices",[
-              52,
-              72
-            ]
-          ])
-        ]
-      ]),
-      "from_user", "johnnyfuncheap",
-      "from_user_id", 20717004,
-      "from_user_id_str", "20717004",
-      "geo", null,
-      "id", 122078271478317056,
-      "id_str", "122078271478317056",
-      "iso_language_code", "en",
-      "metadata", t.map([
-        "result_type", ks.recent
-      ]),
-      "profile_image_url", URI("http://a0.twimg.com/profile_images/1130541908/funcheap_icon_twitter_normal.gif"),
-      "source", "&lt;a href=&quot;http://dlvr.it&quot; rel=&quot;nofollow&quot;&gt;dlvr.it&lt;/a&gt;",
-      "text", "10/8/11: Blue Angels Wine Tasting | Treasure Island http://t.co/fyL8Rs5f",
-      "to_user_id", null,
-      "to_user_id_str", null
-    ]),
-    t.map([
-      "created_at", new Date("Thu, 06 Oct 2011 22:37:28 +0000"),
-      "entities", t.map([
-        "urls", [
-          t.map([
-            "url", URI("http,//t.co/KfzEqOWM"),
-            "expanded_url", URI("http,//married2travel.com/2600/san-francisco-day3-golden-gate-park-pier-39-blue-angels/"),
-            "display_url", "married2travel.com/2600/san-franc\u2026",
-            "indices", [
-              47,
-              67
-            ]
-          ])
-        ]
-      ]),
-      "from_user", "espenorio",
-      "from_user_id", 52736683,
-      "from_user_id_str", "52736683",
-      "geo", null,
-      "id", 122078043664695296,
-      "id_str", "122078043664695296",
-      "iso_language_code", "en",
-      "metadata", t.map([
-        "result_type", ks.recent
-      ]),
-      "profile_image_url", URI("http://a0.twimg.com/profile_images/1574863913/sheil_normal.png"),
-      "source", "&lt;a href=&quot;http://twitter.com/&quot;&gt;web&lt;/a&gt;",
-      "text", "San Francisco 2010 Fleet week photos and video http://t.co/KfzEqOWM",
-      "to_user_id", null,
-      "to_user_id_str", null
+    "statuses", [
+        t.map([
+            "coordinates", null,
+            "favorited", false,
+            "truncated", false,
+            "created_at", new Date("Mon Sep 24 03:35:21 +0000 2012"),
+            "id_str", "250075927172759552",
+            "entities", t.map([
+                "urls", [],
+                "hashtags", [
+                    t.map([
+                        "text", "freebandnames",
+                        "indices", [
+                            20,
+                            34
+                        ]
+                    ])
+                ],
+                "user_mentions", []
+            ]),
+            "in_reply_to_user_id_str", null,
+            "contributors", null,
+            "text", "Aggressive Ponytail #freebandnames",
+            "metadata", t.map([
+                "iso_language_code", "en",
+                "result_type", ks.recent
+            ]),
+            "retweet_count", 0,
+            "in_reply_to_status_id_str", null,
+            "id", 250075927172759552,
+            "geo", null,
+            "retweeted", false,
+            "in_reply_to_user_id", null,
+            "place", null,
+            "user", t.map([
+                "profile_sidebar_fill_color", color("DDEEF6"),
+                "profile_sidebar_border_color", color("C0DEED"),
+                "profile_background_tile", false,
+                "name", "Sean Cummings",
+                "profile_image_url", URI("http://a0.twimg.com/profile_images/2359746665/1v6zfgqo8g0d3mk7ii5s_normal.jpeg"),
+                "created_at", new Date("Mon Apr 26 06:01:55 +0000 2010"),
+                "location", "LA, CA",
+                "follow_request_sent", null,
+                "profile_link_color", color("0084B4"),
+                "is_translator", false,
+                "id_str", "137238150",
+                "entities", t.map([
+                    "url", t.map([
+                        "urls", [
+                            t.map([
+                                "expanded_url", null,
+                                "url", "",
+                                "indices", [
+                                    0,
+                                    0
+                                ]
+                            ])
+                        ]
+                    ]),
+                    "description", t.map([
+                        "urls", []
+                    ])
+                ]),
+                "default_profile", true,
+                "contributors_enabled", false,
+                "favourites_count", 0,
+                "url", null,
+                "profile_image_url_https", URI("https://si0.twimg.com/profile_images/2359746665/1v6zfgqo8g0d3mk7ii5s_normal.jpeg"),
+                "utc_offset", -28800,
+                "id", 137238150,
+                "profile_use_background_image", true,
+                "listed_count", 2,
+                "profile_text_color", color("333333"),
+                "lang", "en",
+                "followers_count", 70,
+                "protected", false,
+                "notifications", null,
+                "profile_background_image_url_https", URI("https://si0.twimg.com/images/themes/theme1/bg.png"),
+                "profile_background_color", color("C0DEED"),
+                "verified", false,
+                "geo_enabled", true,
+                "time_zone", "Pacific Time (US & Canada)",
+                "description", "Born 330 Live 310",
+                "default_profile_image", false,
+                "profile_background_image_url", URI("http://a0.twimg.com/images/themes/theme1/bg.png"),
+                "statuses_count", 579,
+                "friends_count", 110,
+                "following", null,
+                "show_all_inline_media", false,
+                "screen_name", "sean_cummings"
+            ]),
+            "in_reply_to_screen_name", null,
+            "source", "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+            "in_reply_to_status_id", null
+        ]),
+        t.map([
+            "coordinates", null,
+            "favorited", false,
+            "truncated", false,
+            "created_at", new Date("Fri Sep 21 23:40:54 +0000 2012"),
+            "id_str", "249292149810667520",
+            "entities", t.map([
+                "urls", [],
+                "hashtags", [
+                    t.map([
+                        "text", "FreeBandNames",
+                        "indices", [
+                            20,
+                            34
+                        ]
+                    ])
+                ],
+                "user_mentions", []
+            ]),
+            "in_reply_to_user_id_str", null,
+            "contributors", null,
+            "text", "Thee Namaste Nerdz. #FreeBandNames",
+            "metadata", t.map([
+                "iso_language_code", "pl",
+                "result_type", ks.recent
+            ]),
+            "retweet_count", 0,
+            "in_reply_to_status_id_str", null,
+            "id", 249292149810667520,
+            "geo", null,
+            "retweeted", false,
+            "in_reply_to_user_id", null,
+            "place", null,
+            "user", t.map([
+                "profile_sidebar_fill_color", color("DDFFCC"),
+                "profile_sidebar_border_color", color("BDDCAD"),
+                "profile_background_tile", true,
+                "name", "Chaz Martenstein",
+                "profile_image_url", URI("http://a0.twimg.com/profile_images/447958234/Lichtenstein_normal.jpg"),
+                "created_at", new Date("Tue Apr 07 19:05:07 +0000 2009"),
+                "location", "Durham, NC",
+                "follow_request_sent", null,
+                "profile_link_color", color("0084B4"),
+                "is_translator", false,
+                "id_str", "29516238",
+                "entities", t.map([
+                    "url", t.map([
+                        "urls", [
+                            t.map([
+                                "expanded_url", null,
+                                "url", URI("http://bullcityrecords.com/wnng/"),
+                                "indices" [
+                                    0,
+                                    32
+                                ]
+                            ])
+                        ]
+                    ]),
+                    "description", t.map([
+                        "urls", []
+                    ])
+                ]),
+                "default_profile", false,
+                "contributors_enabled", false,
+                "favourites_count", 8,
+                "url", URI("http,//bullcityrecords.com/wnng/"),
+                "profile_image_url_https", URI("https://si0.twimg.com/profile_images/447958234/Lichtenstein_normal.jpg"),
+                "utc_offset", -18000,
+                "id", 29516238,
+                "profile_use_background_image", true,
+                "listed_count", 118,
+                "profile_text_color", color("333333"),
+                "lang", "en",
+                "followers_count", 2052,
+                "protected", false,
+                "notifications", null,
+                "profile_background_image_url_https", URI("https://si0.twimg.com/profile_background_images/9423277/background_tile.bmp"),
+                "profile_background_color", color("9AE4E8"),
+                "verified", false,
+                "geo_enabled", false,
+                "time_zone", "Eastern Time (US & Canada)",
+                "description", "You will come to Durham, North Carolina. I will sell you some records then, here in Durham, North Carolina. Fun will happen.",
+                "default_profile_image", false,
+                "profile_background_image_url", URI("http://a0.twimg.com/profile_background_images/9423277/background_tile.bmp"),
+                "statuses_count", 7579,
+                "friends_count", 348,
+                "following", null,
+                "show_all_inline_media", true,
+                "screen_name", "bullcityrecords"
+            ]),
+            "in_reply_to_screen_name", null,
+            "source", "web",
+            "in_reply_to_status_id", null
+        ]),
+        t.map([
+            "coordinates", null,
+            "favorited", false,
+            "truncated", false,
+            "created_at", new Date("Fri Sep 21 23:30:20 +0000 2012"),
+            "id_str", "249289491129438208",
+            "entities", t.map([
+                "urls", [],
+                "hashtags", [
+                    t.map([
+                        "text", "freebandnames",
+                        "indices", [
+                            29,
+                            43
+                        ]
+                    ])
+                ],
+                "user_mentions", []
+            ]),
+            "in_reply_to_user_id_str", null,
+            "contributors", null,
+            "text", "Mexican Heaven, Mexican Hell #freebandnames",
+            "metadata", t.map([
+                "iso_language_code", "en",
+                "result_type", ks.recent
+            ]),
+            "retweet_count", 0,
+            "in_reply_to_status_id_str", null,
+            "id", 249289491129438208,
+            "geo", null,
+            "retweeted", false,
+            "in_reply_to_user_id", null,
+            "place", null,
+            "user", t.map([
+                "profile_sidebar_fill_color", color("99CC33"),
+                "profile_sidebar_border_color", color("829D5E"),
+                "profile_background_tile", false,
+                "name", "Thomas John Wakeman",
+                "profile_image_url", URI("http://a0.twimg.com/profile_images/2219333930/Froggystyle_normal.png"),
+                "created_at", new Date("Tue Sep 01 21:21:35 +0000 2009"),
+                "location", "Kingston New York",
+                "follow_request_sent", null,
+                "profile_link_color", color("D02B55"),
+                "is_translator", false,
+                "id_str", "70789458",
+                "entities", t.map([
+                    "url", t.map([
+                        "urls", [
+                            t.map([
+                                "expanded_url", null,
+                                "url", "",
+                                "indices", [
+                                    0,
+                                    0
+                                ]
+                            ])
+                        ]
+                    ]),
+                    "description", t.map([
+                        "urls", []
+                    ])
+                ]),
+                "default_profile", false,
+                "contributors_enabled", false,
+                "favourites_count", 19,
+                "url", null,
+                "profile_image_url_https", URI("https://si0.twimg.com/profile_images/2219333930/Froggystyle_normal.png"),
+                "utc_offset", -18000,
+                "id", 70789458,
+                "profile_use_background_image", true,
+                "listed_count", 1,
+                "profile_text_color", color("3E4415"),
+                "lang", "en",
+                "followers_count", 63,
+                "protected", false,
+                "notifications", null,
+                "profile_background_image_url_https", URI("https://si0.twimg.com/images/themes/theme5/bg.gif"),
+                "profile_background_color", color("352726"),
+                "verified", false,
+                "geo_enabled", false,
+                "time_zone", "Eastern Time (US & Canada)",
+                "description", "Science Fiction Writer, sort of. Likes Superheroes, Mole People, Alt. Timelines.",
+                "default_profile_image", false,
+                "profile_background_image_url", URI("http://a0.twimg.com/images/themes/theme5/bg.gif"),
+                "statuses_count", 1048,
+                "friends_count", 63,
+                "following", null,
+                "show_all_inline_media", false,
+                "screen_name", "MonkiesFist"
+            ]),
+            "in_reply_to_screen_name", null,
+            "source", "web",
+            "in_reply_to_status_id", null
+        ]),
+        t.map([
+            "coordinates", null,
+            "favorited", false,
+            "truncated", false,
+            "created_at", new Date("Fri Sep 21 22:51:18 +0000 2012"),
+            "id_str", "249279667666817024",
+            "entities", t.map([
+                "urls", [],
+                "hashtags", [
+                    t.map([
+                        "text", "freebandnames",
+                        "indices", [
+                            20,
+                            34
+                        ]
+                    ])
+                ],
+                "user_mentions", []
+            ]),
+            "in_reply_to_user_id_str", null,
+            "contributors", null,
+            "text", "The Foolish Mortals #freebandnames",
+            "metadata", t.map([
+                "iso_language_code", "en",
+                "result_type", ks.recent
+            ]),
+            "retweet_count", 0,
+            "in_reply_to_status_id_str", null,
+            "id", 249279667666817024,
+            "geo", null,
+            "retweeted", false,
+            "in_reply_to_user_id", null,
+            "place", null,
+            "user", t.map([
+                "profile_sidebar_fill_color", color("BFAC83"),
+                "profile_sidebar_border_color", color("615A44"),
+                "profile_background_tile", true,
+                "name", "Marty Elmer",
+                "profile_image_url", URI("http://a0.twimg.com/profile_images/1629790393/shrinker_2000_trans_normal.png"),
+                "created_at", new Date("Mon May 04 00:05:00 +0000 2009"),
+                "location", "Wisconsin, USA",
+                "follow_request_sent", null,
+                "profile_link_color", color("3B2A26"),
+                "is_translator", false,
+                "id_str", "37539828",
+                "entities", t.map([
+                    "url", t.map([
+                        "urls", [
+                            t.map([
+                                "expanded_url", null,
+                                "url", URI("http,//www.omnitarian.me"),
+                                "indices", [
+                                    0,
+                                    24
+                                ]
+                            ])
+                        ]
+                    ]),
+                    "description", t.map([
+                        "urls", []
+                    ])
+                ]),
+                "default_profile", false,
+                "contributors_enabled", false,
+                "favourites_count", 647,
+                "url", URI("http://www.omnitarian.me"),
+                "profile_image_url_https", URI("https://si0.twimg.com/profile_images/1629790393/shrinker_2000_trans_normal.png"),
+                "utc_offset", -21600,
+                "id", 37539828,
+                "profile_use_background_image", true,
+                "listed_count", 52,
+                "profile_text_color", color("000000"),
+                "lang", "en",
+                "followers_count", 608,
+                "protected", false,
+                "notifications", null,
+                "profile_background_image_url_https", URI("https://si0.twimg.com/profile_background_images/106455659/rect6056-9.png"),
+                "profile_background_color", color("EEE3C4"),
+                "verified", false,
+                "geo_enabled", false,
+                "time_zone", "Central Time (US & Canada)",
+                "description", "Cartoonist, Illustrator, and T-Shirt connoisseur",
+                "default_profile_image", false,
+                "profile_background_image_url", URI("http://a0.twimg.com/profile_background_images/106455659/rect6056-9.png"),
+                "statuses_count", 3575,
+                "friends_count", 249,
+                "following", null,
+                "show_all_inline_media", true,
+                "screen_name", "Omnitarian"
+            ]),
+            "in_reply_to_screen_name", null,
+            "source", "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+            "in_reply_to_status_id", null
+        ])
+    ],
+    "search_metadata", t.map([
+        "max_id", 250126199840518145,
+        "since_id", 24012619984051000,
+        "refresh_url", "?since_id=250126199840518145&q=%23freebandnames&result_type=mixed&include_entities=1",
+        "next_results", "?max_id=249279667666817023&q=%23freebandnames&count=4&include_entities=1&result_type=mixed",
+        "count", 4,
+        "completed_in", 0.035,
+        "since_id_str", "24012619984051000",
+        "query", "%23freebandnames",
+        "max_id_str", "250126199840518145"
     ])
-  ],
-  "results_per_page", 5,
-  "since_id", 0,
-  "since_id_str", "0"
 ]);
 
 module.exports = {

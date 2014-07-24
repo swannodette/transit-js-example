@@ -2,10 +2,12 @@
 
     if(typeof require != "undefined") {
         var transit = require("transit-js"),
-        URI     = require("URIjs");
+            URI     = require("URIjs"),
+            color   = require("color");
     } else {
         var transit = global.transit,
-        URI     = global.URI;
+            URI     = global.URI,
+            color   = global.color;
     }
 
     // ==============================
@@ -16,14 +18,8 @@
         this.lng = lng;
     };
 
-    var Radius = function(n, units) {
-        this.n = n;
-        this.units = units | "mi";
-    };
-
-    var TwitterGeo = function(latlng, radius) {
-        this.latlng = latlng;
-        this.radius = radius;
+    var GeoPoint = function(coordinates) {
+        this.coordinates = coordinates;
     };
 
     // ==============================
@@ -36,11 +32,11 @@
         "latlng": function(v) {
             return new LatLng(v[0], v[1])
         },
-        "radius": function(v) {
-            return new Radius(v[0], v[1]);
+        "color/rgb": function(v) {
+            return color(v);
         },
-        "twitter/geo": function(v) {
-            return new TwitterGeo(v[0], v[1]);
+        "geo/point": function(v) {
+            return new GeoPoint(v);
         }
     };
 
@@ -50,19 +46,19 @@
             "rep": function(v) { return v.toString(); },
             "stringRep": function(v) { return null; }
         }),
+        color.RGB, transit.makeWriteHandler({
+            "tag": function(v) { return "color/rgb" },
+            "rep": function(v) { return v.hex(); },
+            "stringRep": function(v, h) { return h.rep(v); }
+        }),
         LatLng, transit.makeWriteHandler({
-            "tag": function(v) { return "latlng"; },
+            "tag": function(v) { return "geo/latlng"; },
             "rep": function(v) { return [v.lat, v.lng]; },
             "stringRep": function(v) { return null; }
         }),
-        Radius, transit.makeWriteHandler({
-            "tag": function(v) { return "radius"; },
-            "rep": function(v) { return [v.n, v.units]; },
-            "stringRep": function(v) { return null; }
-        }),
-        TwitterGeo, transit.makeWriteHandler({
-            "tag": function(v) { return "twitter/geo"; },
-            "rep": function(v) { return [v.latlng, v.radius]; },
+        GeoPoint, transit.makeWriteHandler({
+            "tag": function(v) { return "geo/point"; },
+            "rep": function(v) { return v.coordinates; },
             "stringRep": function(v) { return null; }
         })
     ]);
