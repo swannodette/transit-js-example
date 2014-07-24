@@ -1,7 +1,8 @@
-var t     = require("transit-js"),
-    URI   = require("URIjs"),
-    color = require("onecolor"),
-    hs    = require("./shared/handlers");
+var t      = require("transit-js"),
+    URI    = require("URIjs"),
+    color  = require("onecolor"),
+    moment = require("moment"),
+    hs     = require("./shared/handlers");
 
 var ks = ["mixed", "recent", "popular"].reduce(function(ret, name) {
     return ret[name] = t.keyword(name);
@@ -429,7 +430,7 @@ var TRANSIT_RESULTS = t.map([
             "coordinates", null,
             "favorited", false,
             "truncated", false,
-            "created_at", new Date("Mon Sep 24 03:35:21 +0000 2012"),
+            "created_at", moment("Mon Sep 24 03:35:21 +0000 2012"),
             "id_str", "250075927172759552",
             "entities", t.map([
                 "urls", [],
@@ -464,7 +465,7 @@ var TRANSIT_RESULTS = t.map([
                 "profile_background_tile", false,
                 "name", "Sean Cummings",
                 "profile_image_url", URI("http://a0.twimg.com/profile_images/2359746665/1v6zfgqo8g0d3mk7ii5s_normal.jpeg"),
-                "created_at", new Date("Mon Apr 26 06:01:55 +0000 2010"),
+                "created_at", moment("Mon Apr 26 06:01:55 +0000 2010"),
                 "location", "LA, CA",
                 "follow_request_sent", null,
                 "profile_link_color", color("0084B4"),
@@ -523,7 +524,7 @@ var TRANSIT_RESULTS = t.map([
             "coordinates", null,
             "favorited", false,
             "truncated", false,
-            "created_at", new Date("Fri Sep 21 23:40:54 +0000 2012"),
+            "created_at", moment("Fri Sep 21 23:40:54 +0000 2012"),
             "id_str", "249292149810667520",
             "entities", t.map([
                 "urls", [],
@@ -558,7 +559,7 @@ var TRANSIT_RESULTS = t.map([
                 "profile_background_tile", true,
                 "name", "Chaz Martenstein",
                 "profile_image_url", URI("http://a0.twimg.com/profile_images/447958234/Lichtenstein_normal.jpg"),
-                "created_at", new Date("Tue Apr 07 19:05:07 +0000 2009"),
+                "created_at", moment("Tue Apr 07 19:05:07 +0000 2009"),
                 "location", "Durham, NC",
                 "follow_request_sent", null,
                 "profile_link_color", color("0084B4"),
@@ -617,7 +618,7 @@ var TRANSIT_RESULTS = t.map([
             "coordinates", null,
             "favorited", false,
             "truncated", false,
-            "created_at", new Date("Fri Sep 21 23:30:20 +0000 2012"),
+            "created_at", moment("Fri Sep 21 23:30:20 +0000 2012"),
             "id_str", "249289491129438208",
             "entities", t.map([
                 "urls", [],
@@ -652,7 +653,7 @@ var TRANSIT_RESULTS = t.map([
                 "profile_background_tile", false,
                 "name", "Thomas John Wakeman",
                 "profile_image_url", URI("http://a0.twimg.com/profile_images/2219333930/Froggystyle_normal.png"),
-                "created_at", new Date("Tue Sep 01 21:21:35 +0000 2009"),
+                "created_at", moment("Tue Sep 01 21:21:35 +0000 2009"),
                 "location", "Kingston New York",
                 "follow_request_sent", null,
                 "profile_link_color", color("D02B55"),
@@ -711,7 +712,7 @@ var TRANSIT_RESULTS = t.map([
             "coordinates", null,
             "favorited", false,
             "truncated", false,
-            "created_at", new Date("Fri Sep 21 22:51:18 +0000 2012"),
+            "created_at", moment("Fri Sep 21 22:51:18 +0000 2012"),
             "id_str", "249279667666817024",
             "entities", t.map([
                 "urls", [],
@@ -746,7 +747,7 @@ var TRANSIT_RESULTS = t.map([
                 "profile_background_tile", true,
                 "name", "Marty Elmer",
                 "profile_image_url", URI("http://a0.twimg.com/profile_images/1629790393/shrinker_2000_trans_normal.png"),
-                "created_at", new Date("Mon May 04 00:05:00 +0000 2009"),
+                "created_at", moment("Mon May 04 00:05:00 +0000 2009"),
                 "location", "Wisconsin, USA",
                 "follow_request_sent", null,
                 "profile_link_color", color("3B2A26"),

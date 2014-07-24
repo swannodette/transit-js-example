@@ -3,11 +3,13 @@
     if(typeof require != "undefined") {
         var transit = require("transit-js"),
             URI     = require("URIjs"),
-            color   = require("onecolor");
+            color   = require("onecolor"),
+            moment  = require("moment");
     } else {
         var transit = global.transit,
             URI     = global.URI,
-            color   = global.one.color;
+            color   = global.one.color,
+            moment  = global.moment;
     }
 
     // ==============================
@@ -26,6 +28,9 @@
     // Handlers
 
     var readHandlers = {
+        "m": function(v) {
+            return moment(v);
+        },
         "r": function(v) {
             return URI(v);
         },
@@ -41,6 +46,11 @@
     };
 
     var writeHandlers = transit.map([
+        moment().constructor, transit.makeWriteHandler({
+            "tag": function(v) { return "m"; },
+            "rep": function(v) { return v.valueOf().toString(); },
+            "stringRep": function(v, h) { return h.rep(v); }
+        }),
         URI, transit.makeWriteHandler({
             "tag": function(v) { return "r"; },
             "rep": function(v) { return v.toString(); },

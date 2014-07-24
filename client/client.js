@@ -1,15 +1,8 @@
-(function(global) {
-    var j  = global.jQuery,
-        _  = global._,
-        t  = global.transit,
-        th = global.transitHandlers,
-        r  = transit.reader("json", {
-                 handlers: _.extend(th.readHandlers, {
-                     "m": function(v) {
-                         return global.moment(parseInt(v,10));
-                     }
-                 })
-             });
+(function(g) {
+    var j = g.jQuery,
+        _ = g._,
+        h = g.transitHandlers,
+        r = g.transit.reader("json", {handlers: h.readHandlers});
 
     j.ajax({
         type: "GET",
