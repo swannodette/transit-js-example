@@ -3,7 +3,7 @@
     if(typeof require != "undefined") {
         var transit = require("transit-js"),
             URI     = require("URIjs"),
-            color   = require("color");
+            color   = require("onecolor");
     } else {
         var transit = global.transit,
             URI     = global.URI,
@@ -47,9 +47,9 @@
             "stringRep": function(v) { return null; }
         }),
         color.RGB, transit.makeWriteHandler({
-            "tag": function(v) { return "color/rgb" },
+            "tag": function(v) { return "color/rgb"; },
             "rep": function(v) { return v.hex(); },
-            "stringRep": function(v, h) { return h.rep(v); }
+            "stringRep": function(v, h) { return null; }
         }),
         LatLng, transit.makeWriteHandler({
             "tag": function(v) { return "geo/latlng"; },
