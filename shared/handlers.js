@@ -49,7 +49,7 @@
         color.RGB, transit.makeWriteHandler({
             "tag": function(v) { return "color/rgb"; },
             "rep": function(v) { return v.hex(); },
-            "stringRep": function(v, h) { return null; }
+            "stringRep": function(v, h) { return h.rep(v); }
         }),
         LatLng, transit.makeWriteHandler({
             "tag": function(v) { return "geo/latlng"; },
