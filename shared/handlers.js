@@ -7,7 +7,7 @@
     } else {
         var transit = global.transit,
             URI     = global.URI,
-            color   = global.color;
+            color   = global.one.color;
     }
 
     // ==============================
