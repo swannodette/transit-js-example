@@ -1,14 +1,14 @@
 (function(g) {
-    var j = g.jQuery,
-        _ = g._,
-        h = g.transitHandlers,
-        r = g.transit.reader("json", {handlers: h.readHandlers});
+    var j   = g.jQuery,
+        _   = g._,
+        h   = g.transitHandlers,
+        rdr = g.transit.reader("json", {handlers: h.readHandlers});
 
     j.ajax({
         type: "GET",
         url: "transit",
         complete: function(res) {
-            var data    = r.read(res.responseText),
+            var data    = rdr.read(res.responseText),
                 status  = data.get("statuses")[0],
                 created = status.get("created_at"),
                 user    = status.get("user"),

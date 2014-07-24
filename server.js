@@ -1,7 +1,7 @@
 var fs       = require("fs"),
     transit  = require("transit-js"),
     handlers = require("./shared/handlers"),
-    w        = transit.writer("json", {"handlers": handlers.writeHandlers});
+    writer   = transit.writer("json", {"handlers": handlers.writeHandlers});
     express  = require("express"),
     app      = express(),
     fakeApi  = require("./fake_api"),
@@ -27,7 +27,7 @@ app.get("/json", function(req, res) {
 
 app.get("/transit", function(req, res) {
     res.setHeader("Content-Type", "application/transit+json");
-    res.send(200, w.write(fakeApi.TRANSIT_RESULTS));
+    res.send(200, writer.write(fakeApi.TRANSIT_RESULTS));
 });
 
 app.listen(3000);
