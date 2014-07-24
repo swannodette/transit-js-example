@@ -1,5 +1,6 @@
 var t   = require("transit-js"),
-    URI = require("URIjs");
+    URI = require("URIjs"),
+    hs  = require("./shared/handlers");
 
 var ks = ["mixed", "recent", "popular"].reduce(function(ret, name) {
     return ret[name] = t.keyword(name);
@@ -32,7 +33,7 @@ var JSON_RESULTS = {
       "from_user":"SFist",
       "from_user_id":14093707,
       "from_user_id_str":"14093707",
-      "geo":null,
+      "geo": null,
       "id":122032448266698752,
       "id_str":"122032448266698752",
       "iso_language_code":"en",

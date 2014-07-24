@@ -16,30 +16,35 @@
         this.lng = lng;
     };
 
+    var Radius = function(n, units) {
+        this.n = n;
+        this.units = units | "mi";
+    };
+
     var TwitterGeo = function(latlng, radius) {
         this.latlng = latlng;
         this.radius = radius;
     };
 
     // ==============================
-    // Read Handlers
+    // Handlers
 
-    var rhs = {
+    var readHandlers = {
         "r": function(v) {
             return URI(v);
         },
         "latlng": function(v) {
             return new LatLng(v[0], v[1])
         },
+        "radius": function(v) {
+            return new Radius(v[0], v[1]);
+        },
         "twitter/geo": function(v) {
             return new TwitterGeo(v[0], v[1]);
         }
     };
 
-    // ==============================
-    // Write Handlers
-
-    var whs = transit.map([
+    var writeHandlers = transit.map([
         URI, transit.makeWriteHandler({
             "tag": function(v) { return "r"; },
             "rep": function(v) { return v.toString(); },
@@ -50,6 +55,11 @@
             "rep": function(v) { return [v.lat, v.lng]; },
             "stringRep": function(v) { return null; }
         }),
+        Radius, transit.makeWriteHandler({
+            "tag": function(v) { return "radius"; },
+            "rep": function(v) { return [v.n, v.units]; },
+            "stringRep": function(v) { return null; }
+        }),
         TwitterGeo, transit.makeWriteHandler({
             "tag": function(v) { return "twitter/geo"; },
             "rep": function(v) { return [v.latlng, v.radius]; },
@@ -57,15 +67,18 @@
         })
     ]);
 
+    // ==============================
+    // Export
+
     if(typeof module != "undefined") {
         module.exports = {
-            readHandlers: rhs,
-            writeHandlers: whs
+            readHandlers: readHandlers,
+            writeHandlers: writeHandlers
         };
     } else {
         global.transitHandlers = {
-            readHandlers: rhs,
-            writeHandlers: whs
+            readHandlers: readHandlers,
+            writeHandlers: writeHandlers
         };
     }
 
