@@ -29,7 +29,7 @@
 
     var readHandlers = {
         "m": function(v) {
-            return moment(v);
+            return moment(parseInt(v));
         },
         "r": function(v) {
             return URI(v);
