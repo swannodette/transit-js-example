@@ -11,10 +11,6 @@
                  })
              });
 
-    j.get("json", function(data) {
-        console.log(data);
-    });
-
     j.ajax({
         type: "GET",
         url: "transit",
@@ -27,8 +23,21 @@
                 url     = user.get("profile_image_url");
 
             console.log(created.add("days", 7).format('MMMM Do YYYY, h:mm:ss a'));
-            console.log(rgb.hex());
+            console.log(rgb.cmyk());
             console.log(url.protocol(), url.path());
         }
     });
+    
+    j.get("json", function(data) {
+        var status  = data["statuses"][0],
+            created = status["created_at"]
+            user    = status["user"],
+            rgb     = user["profile_sidebar_fill_color"],
+            url     = user["profile_image_url"];
+
+        console.log(created);
+        console.log(rgb);
+        console.log(url);
+    });
+
 })(this);
