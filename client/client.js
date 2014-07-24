@@ -19,9 +19,16 @@
         type: "GET",
         url: "transit",
         complete: function(res) {
-            var data = r.read(res.responseText),
-                date = data.get("results")[0].get("created_at");
-            console.log(date.add("days", 7).format('MMMM Do YYYY, h:mm:ss a'));
+            var data    = r.read(res.responseText),
+                status  = data.get("statuses")[0],
+                created = status.get("created_at"),
+                user    = status.get("user"),
+                rgb     = user.get("profile_sidebar_fill_color"),
+                url     = user.get("profile_image_url");
+
+            console.log(created.add("days", 7).format('MMMM Do YYYY, h:mm:ss a'));
+            console.log(rgb.hex());
+            console.log(url.protocol(), url.path());
         }
     });
 })(this);
